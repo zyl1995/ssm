@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssmdemo.zyl.dao.BookDao">
+    <select id="queryById" parameterType="long" resultType="Book">
+        SELECT
+            book_id,
+            name,
+            number
+        FROM
+            book
+        WHERE
+            book_id = #{booKId}
+    </select>
+
+    <select id="queryList" resultType="Book">
+        SELECT
+            book_id,
+            name,
+            number
+        FROM
+            book
+        ORDER BY
+            book_id
+        LIMIT
+            #{start}, #{size}
+    </select>
+
+    <update id="reduceNumber">
+        UPDATE book
+        SET
+            number = number - 1
+        WHERE
+            book_id = #{book_id}
+        AND number > 0
+    </update>
+</mapper>
